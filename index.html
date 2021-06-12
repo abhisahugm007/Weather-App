@@ -8,12 +8,22 @@
       integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
       crossorigin="anonymous"
     />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <!--                                 My CSS                          -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Weather App</h1>
+    <div class="container" id="cont">
+      <h1 style="font-weight: bold">Weather App</h1>
       <div class="search-bar">
         <input type="text" id="cityName" placeholder="Search City" />
         <button id="mybtn" onclick="WeatherByCity()" class="btn btn-secondary">
@@ -21,23 +31,85 @@
         </button>
       </div>
       <div class="notification"></div>
-      <div class="weather-app">
+      <div class="weather-app" style="text-align: center">
         <div class="weather-icon">
           <img src="icons/unknown.png" alt="" />
         </div>
-        <div class="temperature-value">
+        <div class="temperature-value" style="font-size: 50px">
           <p>- °<span>C</span></p>
         </div>
         <div class="temperature-description">
+          <div style="font-size: 50px"><p id="location">-</p></div>
           <p id="weatherDescription">-</p>
           <p id="humidity"><span>Humadity=</span>-<span>%</span></p>
           <p id="windSpeed"><span>Wind=</span>-</p>
           <p id="Date">-</p>
           <p id="Time">-</p>
-          <p id="location">-</p>
+        </div>
+      </div>
+
+      <!-- forcast frontend -->
+
+      <div class="row" style="text-align: center">
+        <div class="col bg-light day1" style="border-bottom-left-radius: 30px">
+          <h6 id="dayName">Day</h6>
+          <div id="imag">
+            <img src="icons/unknown.png" alt="" width="70" height="70" />
+          </div>
+          <h6 id="temp">32℃/38℃</h6>
+        </div>
+        <div class="col bg-warning day2">
+          <h6 id="dayName">Day</h6>
+          <div id="imag">
+            <img src="icons/unknown.png" alt="" width="70" height="70" />
+          </div>
+          <h6 id="temp">32℃/38℃</h6>
+        </div>
+        <div class="col bg-light day3">
+          <h6 id="dayName">Day</h6>
+          <div id="imag">
+            <img src="icons/unknown.png" alt="" width="70" height="70" />
+          </div>
+          <h6 id="temp">32℃/38℃</h6>
+        </div>
+        <div class="col bg-warning day4">
+          <h6 id="dayName">Day</h6>
+          <div id="imag">
+            <img src="icons/unknown.png" alt="" width="70" height="70" />
+          </div>
+          <h6 id="temp">32℃/38℃</h6>
+        </div>
+        <div class="col bg-light day5">
+          <h6 id="dayName">Day</h6>
+          <div id="imag">
+            <img src="icons/unknown.png" alt="" width="70" height="70" />
+          </div>
+          <h6 id="temp">32℃/38℃</h6>
+        </div>
+        <div
+          class="col bg-warning day6"
+          style="border-bottom-right-radius: 30px"
+        >
+          <h6 id="dayName">Day</h6>
+          <div id="imag">
+            <img src="icons/unknown.png" alt="" width="70" height="70" />
+          </div>
+          <h6 id="temp">32℃/38℃</h6>
         </div>
       </div>
     </div>
+
+    <!-- search by press Enter -->
+    <script>
+      document
+        .getElementById("cityName")
+        .addEventListener("keyup", function (event) {
+          event.preventDefault();
+          if (event.keyCode === 13) {
+            document.getElementById("mybtn").click();
+          }
+        });
+    </script>
     <script src="App.js"></script>
   </body>
 </html>

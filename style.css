@@ -1,15 +1,16 @@
 body {
   background: #fdfaf6;
+  background-image: url("https://www.freecodecamp.org/news/content/images/size/w2000/2021/06/w-qjCHPZbeXCQ-unsplash.jpg");
 }
 .container {
   width: 150%;
-  background-color: #d6d2c4;
+  background-color: #eaeaea8a;
+  /* #eaeaeaad */
 
   display: block;
   margin: 10px auto;
-
-  border-radius: 10px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  border-radius: 30px;
 }
 input {
   margin-top: 100px;
@@ -24,10 +25,18 @@ input {
 button {
   margin: 10px;
 }
+.btn {
+  vertical-align: baseline;
+}
 
 .weather-app {
   width: 500px;
   background-color: white;
+  background-image: linear-gradient(
+    to right,
+    rgba(44, 161, 33, 0),
+    rgba(68, 143, 228, 0.397)
+  );
 
   display: block;
   margin: 10px auto;
@@ -38,3 +47,20 @@ button {
 .tempreture-value {
   display: flex;
 }
+
+.days {
+  float: left;
+  width: 20%;
+}
+
+.forcastChart:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=37.42159&longitude=-122.0837&localityLanguage=en */
+
+/* https://api.locationiq.com/v1/autocomplete.php?key=pk.bfea53eb6538c4423cd9bcb8b8ebb554&q=${city}&limit=5 */
+
+/* API KEY LocationIQ : pk.bfea53eb6538c4423cd9bcb8b8ebb554 */
