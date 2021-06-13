@@ -5,7 +5,7 @@
 // https://api.openweathermap.org/data/2.5/onecall?lat=26.93088&lon=75.81036&exclude=minutely,hourly,current&appid=e76922f5326219582ed640f1b11f0e26
 
 const iconElement = document.querySelector(".weather-icon");
-const tempElement = document.querySelector(".temperature-value p");
+const tempElement = document.querySelector(".temperature-value #temp");
 const descElement = document.querySelector("#weatherDescription");
 const humadityElement = document.querySelector("#humidity");
 const windElement = document.querySelector("#windSpeed");
@@ -97,18 +97,21 @@ function getcityName(lat, lon) {
       return response.json();
     })
     .then((data) => {
-      city = data.address.city != null ? data.address.city : data.address.state;
+      weather.city =
+        data.address.city != null ? data.address.city : data.address.state;
+      weather.country = data.address.country_code.toUpperCase();
     })
     .then(() => {
       console.log(city);
-      getWeatherByLocation(lat, lon, city);
+      getWeatherByLocation(lat, lon);
     });
 }
 // SHOW ERROR WHEN THERE IS AN ISSUE WITH GEOLOCATION SERVICE
 function showError(error) {
   notificationElement.style.display = "block";
-  getWeatherByLocation(28.7041, 77.1025, "New Delhi");
-  //notificationElement.innerHTML = `<p> it is an error ${error.message} </p>`;
+  weather.city = "New Delhi";
+  weather.country = "IN";
+  getWeatherByLocation(28.7041, 77.1025);
 }
 
 //weather from user input city
@@ -125,22 +128,24 @@ function WeatherByCity() {
     .then(function (data) {
       geocode.latitude = data[0].lat;
       geocode.longitude = data[0].lon;
+      weather.city = data[0].name;
+      weather.country = data[0].country;
     })
     .then(function () {
-      getWeatherByLocation(geocode.latitude, geocode.longitude, city);
+      getWeatherByLocation(geocode.latitude, geocode.longitude);
     });
 }
 
 //Weather from location access Api
-function getWeatherByLocation(latitude, longitude, city) {
+function getWeatherByLocation(latitude, longitude) {
   console.log("latitude : " + latitude + " longitude: " + longitude);
   let api = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${key}`;
 
-  fetchweatherApi(api, city);
+  fetchweatherApi(api);
 }
 
 //fetch API
-function fetchweatherApi(api, city) {
+function fetchweatherApi(api) {
   fetch(api)
     .then(function (response) {
       let data = response.json();
@@ -153,8 +158,6 @@ function fetchweatherApi(api, city) {
 
       weather.description = data.current.weather[0].description;
       weather.iconId = data.current.weather[0].icon;
-      weather.city = city;
-      //weather.country = data.city.country;
       weather.humidity = data.current.humidity;
       weather.wind = parseInt(data.current.wind_speed * kmph);
 
@@ -163,6 +166,8 @@ function fetchweatherApi(api, city) {
       weather.Time = dateTime.substr(dateTime.indexOf("-") + 1);
 
       weather.Type = data.current.weather[0].main;
+
+      //set forcast Data
 
       for (var i = 1; i <= 7; i++) {
         let dayName = dateConverter(data.daily[i].dt, 1);
@@ -178,16 +183,13 @@ function fetchweatherApi(api, city) {
       displayWeather();
     });
 }
-console.log(Object.keys(weather));
-console.log(Object.entries(weather));
-
 //display weather info in the App
 function displayWeather() {
   iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
   tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
   descElement.innerHTML = `<span>Description : </span>${weather.description}`;
-  locationElement.innerHTML = `${weather.city}`;
-  windElement.innerHTML = `<span>Wind Speed : </span>${weather.wind} km/h`;
+  locationElement.innerHTML = `${weather.city},${weather.country}`;
+  windElement.innerHTML = `<span>Wind : </span>${weather.wind} km/h`;
   humadityElement.innerHTML = `<span>Humidity : </span>${weather.humidity}<span>%</span>`;
   dateElement.innerHTML = `${weather.date}`;
   TimeElement.innerHTML = `<span>Time : </span>${weather.Time}`;

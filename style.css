@@ -2,6 +2,8 @@ body {
   background: #fdfaf6;
   background-image: url("https://www.freecodecamp.org/news/content/images/size/w2000/2021/06/w-qjCHPZbeXCQ-unsplash.jpg");
 }
+.header {
+}
 .container {
   width: 150%;
   background-color: #eaeaea8a;
@@ -44,20 +46,33 @@ button {
   border-radius: 10px;
   padding: 50px;
 }
-.tempreture-value {
+.temperature-value p {
   display: flex;
+  font-size: 3.5rem;
+  margin-left: 5rem;
+  margin-top: 1.5rem;
 }
 
+.temperature-description {
+  font-size: 25px;
+  font-weight: 500;
+  font-family: calibri;
+}
+.temperature-description #location {
+  font-size: 3.5rem;
+  font-family: calibri;
+  margin-top: 1rem;
+}
 .days {
   float: left;
   width: 20%;
 }
-
+/* 
 .forcastChart:after {
   content: "";
   display: table;
   clear: both;
-}
+} */
 
 /* https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=37.42159&longitude=-122.0837&localityLanguage=en */
 
